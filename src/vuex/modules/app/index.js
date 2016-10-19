@@ -6,7 +6,7 @@ import * as getters from './getters'
 import mutations from './mutations'
 
 const state = {
-  leftNavState: false,
+  leftNavState: true,
   loading: false
 }
 

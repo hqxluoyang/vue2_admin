@@ -6,13 +6,13 @@
           <i class="iconfont icon-list"></i>
         </div>
         <div class="toolbar-title">
-          卖座电影
+          闪传音乐管理
         </div>
       </a>
     </h1>
     <div id="nav-right">
 <!--       <a href="javascript: void 0;" class="city">
-        <span class="city-content">广州</span>
+        <span class="city-content">北京</span>
         <i class="iconfont icon-dropdown"></i>
       </a> -->
       <router-link to='/login' class="user">

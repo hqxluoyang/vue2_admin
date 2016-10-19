@@ -2,7 +2,9 @@
   <div class="main">
     <Navbar></Navbar>
     <div class="application-view">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
     <Sidebar></Sidebar>
     <div id="nprogress">
@@ -35,8 +37,18 @@ export default {
 <style lang="less">
   @import "assets/styles/icon.css";
   @import "assets/styles/reset.css";
+
+  .main{
+    height:100%;
+    width:100%;
+    position:absolute;
+    overflow:hidden;
+  }
   .application-view{
-    padding: 50px 0 0;
+    margin:auto;
+    margin-left:100px;
+    margin-right:0;
+    margin-top:50px;
   }
   body{
     background-color: #ebebeb;

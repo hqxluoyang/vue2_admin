@@ -5,9 +5,9 @@
       <div class="sidebar-overlay">
         <transition name="leftNav">
         <nav v-show="show">
-          <ul>
+          <ul style="text-align:center">
             <li v-for="menu in menuList">
-              <router-link :to='menu.path'><span>{{menu.name}}</span><i class="iconfont icon-arrow-right right"></i></router-link>
+              <router-link :to='menu.path'><span>{{menu.name}}</span></router-link>
             </li>
           </ul>
         </nav>
@@ -19,6 +19,12 @@
 </template>
 
 <style lang="less">
+
+.router-link-active{
+  background:red;
+  color:green;
+}
+
 .application-sidebar {
   .sidebar-enter-active,.sidebar-leave-active{
     transition: all ease .4s;
@@ -33,7 +39,7 @@
     top: 0;
     bottom: 0;
     left: 0;
-    right: 0;
+	width:100px;
     color: #9a9a9a;
     z-index: 501;
     a{
@@ -44,7 +50,7 @@
       background: rgba(0,0,0,0.5);
       position: absolute;
       top: 50px;
-      right: 0;
+      width:100px;
       bottom: 0;
       left: 0;
       .leftNav-enter-active,.leftNav-leave--active{
@@ -61,7 +67,7 @@
         position: absolute;
         display: block;
         top: 0;
-        right: 110px;
+        width:100px;
         bottom: 0;
         left: 0;
 
@@ -98,12 +104,12 @@
       })
     },
     data () {
-      let menuList = [{name: '首页', path: '/'}, {name: '影片', path: '/film'}, {name: '影院', path: '/cinema'}, {name: '我的', path: '/login'}, {name: '卖座网查询', path: '/card'}]
+      let menuList = [{name: '首页', path: '/'}, {name: '音乐管理', path: '/film'}, {name: '音乐上架', path: '/cinema'}, {name: '用户管理', path: '/login'}, {name: '设置', path: '/card'}]
       return { menuList: menuList }
     },
     methods: {
       hideNav () {
-        this.$store.dispatch('changeLeftNavState', false)
+        this.$store.dispatch('changeLeftNavState', true)
       }
     }
   }
