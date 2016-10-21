@@ -21,11 +21,11 @@
 <style lang="less">
 
 .router-link-active{
-  background:red;
-  color:green;
+  color:#fff;
 }
 
 .application-sidebar {
+
   .sidebar-enter-active,.sidebar-leave-active{
     transition: all ease .4s;
     -webkit-transition: all ease .4s;
@@ -67,6 +67,7 @@
         position: absolute;
         display: block;
         top: 0;
+       
         width:100px;
         bottom: 0;
         left: 0;
@@ -75,6 +76,8 @@
           overflow: hidden;
           line-height: 50px;
           height: 51px;
+          color: #9a9a9a;
+          font-size: 14px;
           a{
 
             display: block;
@@ -104,7 +107,7 @@
       })
     },
     data () {
-      let menuList = [{name: '首页', path: '/'}, {name: '音乐管理', path: '/film'}, {name: '音乐上架', path: '/cinema'}, {name: '用户管理', path: '/login'}, {name: '设置', path: '/card'}]
+      let menuList = [{name: '首页', path: '/'}, {name: '音乐管理', path: '/music'}, {name: '音乐上架', path: '/cinema'}, {name: '用户管理', path: '/login'}, {name: '设置', path: '/card'}]
       return { menuList: menuList }
     },
     methods: {

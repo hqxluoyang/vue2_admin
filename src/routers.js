@@ -7,9 +7,9 @@ export default [{
   name: 'login',
   component: require('./views/member/login')
 }, {
-  path: '/film',
-  name: 'film',
-  component: require('./views/film/film-view')
+  path: '/music',
+  name: 'music',
+  component: require('./views/music/index')
 }, {
   path: '/cinema',
   name: 'cinema',

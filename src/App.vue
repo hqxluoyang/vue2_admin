@@ -2,9 +2,11 @@
   <div class="main">
     <Navbar></Navbar>
     <div class="application-view">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+      <transition name="fade">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      <transition>
     </div>
     <Sidebar></Sidebar>
     <div id="nprogress">
@@ -15,6 +17,7 @@
         <div class="spinner-icon"></div>
       </div>
     </div>
+    <allPanel></allPanel>
   </div>
 
 </template>
@@ -23,10 +26,11 @@
 <script>
 import Sidebar from './components/sidebar'
 import Navbar from './components/navbar'
+import allPanel from './views/allPanel/index'
 import { mapGetters } from 'vuex'
 export default {
   components: {
-    Sidebar, Navbar
+    Sidebar, Navbar, allPanel
   },
   computed: mapGetters({
     loading: 'getLoading'
