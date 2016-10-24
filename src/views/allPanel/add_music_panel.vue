@@ -4,34 +4,134 @@
 	fun: button
 ***/
 
-<style>
+<style lang="less">
 	.vx-panel{
       width:400px;
-      position:relative;
+      background:#f3f3f3;
+      left:50%;
+      top:100px;
+      min-height:100px;
+      margin-left:-200px;
+      border-radius:10px;
+      position:absolute;
       
 	}
+
+  .musicPanel{
+    min-height:50px;
+    position:relative;
+    padding-right:10px;
+    padding-left:10px;
+    .uploadPanel{
+      label{
+        display:inline-block;
+        width:100px;
+        text-align:right;
+      }
+      .line{
+        margin-top:10px;
+        min-height:40px;
+        margin-bottom:10px;
+        .inputStyle{
+          width:200px;
+        }
+      }
+
+      .line.marginL{
+        margin-left:20px;
+      }
+    }
+  }
 </style>
 
 <template>
-	<div class="vx-panel">
-	  <musicPanelHeader></musicPanelHeader>
+  <transition name="fade">
+	<div class="vx-panel" v-show="isShow">
+	  <musicPanelHeader text="添加音乐"></musicPanelHeader>
+    <div class="musicPanel">
+      <ul class="uploadPanel">
+        <li class="line">
+          <vxBnt bg="#00d1b2" id='upload_music' text="上传音乐"></vxBnt>
+          <input id="uploadMusicId" @change="musicChange($event)" type="file" style="display:none"/>
+          <vxProgress :width="progressMusic"></vxProgress>
+        </li>
+        <li class="line">
+          <vxBnt bg="#00d1b2" id='upload_pic' text="上传图片"></vxBnt>
+          <input id="uploadMusicId" @change="picChange($event)" type="file" style="display:none"/>
+          <vxProgress :width="progressPic"></vxProgress>
+        </li>
+        <li class="line">
+          <label>歌曲名称</label>
+          <input class="inputStyle"/>
+        </li>
+        <li class="line">
+          <label>作者</label>
+          <input class="inputStyle"/>
+        </li>
+         <li class="line">
+          <label>类型</label>
+          <input class="inputStyle"/>
+        </li>
+         <li class="line">
+          <label>作者</label>
+          <input class="inputStyle"/>
+        </li>
+      </ul>
+    </div>
     <musicPanelfoter></musicPanelfoter>
+    </transition>
 	</div>
 </template>
 
 <script>
 import musicPanelHeader from '../../components/panel/panel_header'
 import musicPanelfoter from '../../components/panel/panel_foter'
+import vxBnt from '../../components/vx_bnt.vue'
+import vxProgress from '../../components/progress.vue'
+import { mapGetters } from 'vuex'
 export default {
-  methods: {
-    clickBnt (e) {
-      this.$parent.clickBnt(e)
+  data () {
+    return {
+      flag: true,
+      progressMusic: 0,
+      progressPic: 0
     }
+  },
+  methods: {
+    clickBnt (e, id) {
+      switch (id) {
+        case 'upload_music':
+          let dom = document.getElementById('uploadMusicId')
+          dom.click()
+          break
+        case 'upload_pic':
+          let domPic = document.getElementById('uploadPicId')
+          domPic.click()
+          break
+        default:
+      }
+    },
+    clickClose () {
+      this.$store.dispatch('changeAddMusicState', false)
+    },
+    submit (e) {
+      console.log('submit')
+      this.$store.dispatch('changeAddMusicState', false)
+    },
+    cancel (e) {
+      console.log('cancel')
+      this.$store.dispatch('changeAddMusicState', false)
+    }
+  },
+  computed: {
+    ...mapGetters({
+      isShow: 'getAddMusic'
+    })
   },
   props: {
     bg: String,
     text: String
   },
-  components: {addMusicPanel}
+  components: {musicPanelfoter, musicPanelHeader, vxBnt, vxProgress}
 }
 </script>

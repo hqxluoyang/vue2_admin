@@ -1,11 +1,17 @@
+<style>
+</style>
+
 <template>
 	<div>
-  ddddddddddd
+    
+      <addMusicPanel></addMusicPanel>
+    
   </div>
 </template>
 
 <script>
+import addMusicPanel from './add_music_panel'
 export default {
-  components: {}
+  components: {addMusicPanel}
 }
 </script>

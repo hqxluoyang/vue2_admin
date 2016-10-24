@@ -70,3 +70,21 @@ html { overflow-y: scroll; }
 
 */
 html { overflow:hidden; }
+
+
+input {
+  border:0;
+  background:#fff;
+  background-color:transparent;
+  outline:none;
+  height:25px;
+  margin-left:10px;
+  border-bottom:1px solid #ccc;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}

@@ -7,5 +7,7 @@ define([], function(){
 	date:2016-10-21
 	fun:配置文件
 **/
-export default {}
-const config = {}
+
+export default {
+	url:'http://54.223.119.207:8082/'
+}

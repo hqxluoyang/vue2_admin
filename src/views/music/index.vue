@@ -6,9 +6,9 @@
 
 <style lang="less">
 	.music_container{
-		width:100%;
 		height:100%;
-		position:absolute;
+    margin:0 auto;
+		position:relative;
 
     .topBnt{
       position:relative;
@@ -20,7 +20,6 @@
 
     .vx_table{
       with:100%;
-      background:green;
     }
 
 	}
@@ -30,12 +29,12 @@
 	<div class="music_container">
 		<ul>
       <li class="topBnt">
-        <vxBnt bg="red" text="添加音乐"></vxBnt>
-        <vxBnt bg="red" text="删除"></vxBnt>
+        <vxBnt bg="#00d1b2" id="add_music" text="添加音乐"></vxBnt>
+        <vxBnt bg="#00d1b2" id="del_music" text="删除"></vxBnt>
       </li>
 
       <li class="vx_table" v-bind:style="{height:h + 'px'}">
-      df
+        <musicTable></musicTable>
       </li>
 
     </ul>
@@ -47,6 +46,7 @@
 import { mapGetters } from 'vuex'
 import vxBnt from '../../components/vx_bnt.vue'
 import tools from '../../service/tools.js'
+import musicTable from './musicTable.vue'
 
 export default{
   data () {
@@ -57,8 +57,17 @@ export default{
   methods: {
     changeFile (e) {
     },
-    clickBnt (e) {
-      console.log('hiiiiiiiiiiiiiiiii')
+    clickBnt (e, id) {
+      if (id === 'add_music') {
+        console.log('kk')
+        this.$store.dispatch('changeAddMusicState', true)
+      } else if (id === 'del_music') {
+        console.log('dfffe')
+      }
+      console.log('hiiiiiiiiiiiiiiiii:', id)
+    },
+    click_bnt_img () {
+      console.log('kkkkkkkkkkkkkkkkkkkkkkkkkk')
     }
   },
   mounted () {
@@ -72,7 +81,7 @@ export default{
   },
   created () {
   },
-  components: {vxBnt}
+  components: {vxBnt, musicTable}
 }
 
 </script>

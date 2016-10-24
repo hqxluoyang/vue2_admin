@@ -1,32 +1,30 @@
 /**
 	author : sailing
 	date : 2016-10-21
-	fun: button
+	fun: progress
 ***/
 
 <style lang="less">
-	.vx-bnt{
-      height:30px;
+	.vx-progress{
+      height:5px;
       position:relative;
       text-align:center;
-      padding-left:10px;
-      padding-right:10px;
       color:#fff;
-      min-width:80px;
+      width:200px;
       margin-left:20px;
       background:#00d1b2;
-      line-height:30px;
       display:inline-block;
-      :hover{
-        cusor:pointer;
-        background:red;
+      .classWidth{
+      	position:absolute;
+      	height:5px;
+      	background:red;
       }
 	}
 </style>
 
 <template>
-	<div class="vx-bnt" @click="clickBnt($event)" v-bind:style="{background:bg}">
-	  {{text}}
+	<div class="vx-progress">
+	  <p class="classWidth" v-bind:style="{width:width + 'px'}"></p>
 	</div>
 </template>
 
@@ -38,9 +36,7 @@ export default {
     }
   },
   props: {
-    bg: String,
-    text: String,
-    id: String
+    width: Number
   }
 }
 </script>
