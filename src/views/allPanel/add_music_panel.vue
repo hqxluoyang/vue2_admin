@@ -88,6 +88,7 @@ import musicPanelHeader from '../../components/panel/panel_header'
 import musicPanelfoter from '../../components/panel/panel_foter'
 import vxBnt from '../../components/vx_bnt.vue'
 import vxProgress from '../../components/progress.vue'
+import upModule from '../../service/uploadFile.js'
 import { mapGetters } from 'vuex'
 export default {
   data () {
@@ -117,6 +118,12 @@ export default {
     submit (e) {
       console.log('submit')
       this.$store.dispatch('changeAddMusicState', false)
+    },
+    musicChange (e) {
+      console.log(e.target.files)
+      upModule.uploadObj({
+        files: e.target.files
+      })
     },
     cancel (e) {
       console.log('cancel')
