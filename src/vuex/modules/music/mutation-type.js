@@ -7,3 +7,7 @@ export const ADD_MUSIC_PANEL = 'ADD_MUSIC_PANEL'
 export const GET_MUSIC_LIST = 'GET_MUSIC_LIST'
 
 export const FETCH_MUSIC_LIST_SUCCESS = 'FETCH_MUSIC_LIST_SUCCESS'
+export const PUSH_MUSIC_LIST = 'PUSH_MUSIC_LIST'    // 添加音乐数组到列表
+
+export const UPLOAD_BACK_ITEM = 'UPLOAD_BACK_ITEM' // 添加音乐的时候展示当前元素
+export const UPLOAD_MUSIC_FROM = 'UPLOAD_MUSIC_FROM' // 提交上传的音乐的表单

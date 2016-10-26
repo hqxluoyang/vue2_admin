@@ -2,6 +2,7 @@
 	author : sailing
 	date : 2016-10-21
 ****/
+import Config from './config'
 export default {
   getPageHeight () {
     return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
@@ -16,5 +17,22 @@ export default {
   getContainerW () {
     const w = this.getPageWidth()
     return w
+  },
+  getUrl (query) {
+    var url = Config.url + query
+    return url 
+  },
+  jsonToStr (json) {
+    var str = '';
+    if(json){
+      for(var i in json){
+        if(str == ''){
+          str=i+'=' + json[i]
+        } else {
+          str +='&' + i + '=' + json[i]
+        }
+      }
+    }
+    return str 
   }
 }

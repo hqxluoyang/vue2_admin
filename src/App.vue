@@ -2,21 +2,11 @@
   <div class="main">
     <Navbar></Navbar>
     <div class="application-view">
-      <transition name="fade">
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
-      <transition>
     </div>
     <Sidebar></Sidebar>
-    <div id="nprogress">
-      <!--<div class="bar" role="bar" style="transform: translate3d(-35.3056%, 0px, 0px); transition: all 200ms ease;">-->
-      <!--<div class="peg"></div>-->
-      <!--</div>-->
-      <div class="spinner" role="spinner" v-show="loading">
-        <div class="spinner-icon"></div>
-      </div>
-    </div>
     <allPanel></allPanel>
   </div>
 

@@ -2,14 +2,8 @@
 
   <section class="content">
     <swiper class="my-swipe" :options="swiperOption">
-      <swiper-slide class="silde" v-for="billboard in billboards">
-        <a v-bind:href="billboard.url">
-          <image-placeholder :src='billboard.imageUrl' placeholder="http://static.m.maizuo.com/v4/static/app/asset/3d2cdb3bd9a23609aa2d84e7c2bfd035.png"></image-placeholder>
-        </a>
-      </swiper-slide>
     </swiper>
     <div class="movie">
-      <now-playing :films="nowPlayingFilms"></now-playing>
       <coming-soon :films="comingSoonFilms"></coming-soon>
     </div>
   </section>
@@ -52,9 +46,6 @@
       })
     },
     created () {
-      this.$store.dispatch('fetchComingSoonLists', 1, 5)
-      this.$store.dispatch('fetchNowPlayingLists', 1, 5)
-      this.$store.dispatch('fetchBillboards')
     },
     components: {
       NowPlaying, ComingSoon, ImagePlaceholder, swiper, swiperSlide

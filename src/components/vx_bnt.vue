@@ -17,11 +17,14 @@
       background:#00d1b2;
       line-height:30px;
       display:inline-block;
-      :hover{
-        cusor:pointer;
-        background:red;
-      }
+      
 	}
+
+  .vx-bnt:hover{
+        cursor:pointer;
+        background:red;
+        }
+
 </style>
 
 <template>

@@ -1,7 +1,4 @@
 
-define([], function(){
-/********全局配置参数**********/
-	
 /**
 	author: sailing
 	date:2016-10-21
@@ -9,4 +6,5 @@ define([], function(){
 **/
 export default {
 	url:'http://54.223.119.207:8082/'
+	//url: 'http://192.168.1.53:8082/'
 }

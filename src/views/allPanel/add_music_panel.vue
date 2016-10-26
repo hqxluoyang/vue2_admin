@@ -45,7 +45,8 @@
 </style>
 
 <template>
-  <transition name="fade">
+
+  <transition name="fadeIn">
 	<div class="vx-panel" v-show="isShow">
 	  <musicPanelHeader text="添加音乐"></musicPanelHeader>
     <div class="musicPanel">
@@ -61,26 +62,27 @@
           <vxProgress :width="progressPic"></vxProgress>
         </li>
         <li class="line">
-          <label>歌曲名称</label>
-          <input class="inputStyle"/>
+          <label>作者</label>
+          <input v-model='showItem.singer' class="inputStyle"/>
         </li>
         <li class="line">
-          <label>作者</label>
-          <input class="inputStyle"/>
+          <label>歌曲名称</label>
+          <input v-model='showItem.song' class="inputStyle"/>
         </li>
-         <li class="line">
-          <label>类型</label>
-          <input class="inputStyle"/>
+        <li class="line">
+          <label>文件名称</label>
+          <input v-model='showItem.filename' class="inputStyle"/>
         </li>
+        
          <li class="line">
-          <label>作者</label>
-          <input class="inputStyle"/>
+          <label>歌曲集合</label>
+          <input v-model='showItem.album' class="inputStyle"/>
         </li>
       </ul>
     </div>
     <musicPanelfoter></musicPanelfoter>
-    </transition>
-	</div>
+  </div>
+  </transition>
 </template>
 
 <script>
@@ -117,12 +119,13 @@ export default {
     },
     submit (e) {
       console.log('submit')
-      this.$store.dispatch('changeAddMusicState', false)
+      this.$store.dispatch('uploadMusicForm', this.showItem)
     },
     musicChange (e) {
       console.log(e.target.files)
       upModule.uploadObj({
-        files: e.target.files
+        files: e.target.files,
+        vm: this
       })
     },
     cancel (e) {
@@ -132,7 +135,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isShow: 'getAddMusic'
+      isShow: 'getAddMusic',
+      showItem: 'getUploadBackItem'
     })
   },
   props: {

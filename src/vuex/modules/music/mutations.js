@@ -1,6 +1,9 @@
 import {
   ADD_MUSIC_PANEL,
-  FETCH_MUSIC_LIST_SUCCESS
+  FETCH_MUSIC_LIST_SUCCESS,
+  PUSH_MUSIC_LIST,
+  UPLOAD_BACK_ITEM,
+  UPLOAD_MUSIC_FROM
   }
   from './mutation-type'
 
@@ -12,8 +15,20 @@ const mutations = {
   },
   // 获取music列表的状态
   [FETCH_MUSIC_LIST_SUCCESS] (state, data) {
-    console.log('kllllllllllllllllllllllllllllllllllll:', data)
     state.musicTable = data
+  },
+  // 添加音乐list
+  [PUSH_MUSIC_LIST] (state, musicList) {
+    console.log('PUSH_MUSIC_LIST xxxxxxxxxxxxx' , musicList)
+    for(var i=0; i<musicList.length ; i++){
+      state.musicTable.push(musicList[i])
+    }
+  },
+  // 上传音乐成功之后要显示的东西元素
+  [UPLOAD_BACK_ITEM] (state, uploadItem) {
+    for(var i in uploadItem){
+      state.uploadBackItem[i] = uploadItem[i]
+    }
   }
 }
 
