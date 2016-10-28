@@ -5,6 +5,22 @@
 ***/
 
 export default {
+  getMusicPicData (file , type) {
+    let item =''
+    if(type === 'img'){
+      item = this.getImgData(file);
+    } else {
+      item = this.getMusicData(file);
+    }
+
+    return item
+  },
+  getImgData (file) {
+    const backfile = {}
+    backfile['imgs'] = file['file_NameNew']
+    backfile['imgpath'] = file['file_LocalPath']
+    return backfile
+  },
   getMusicData (file) {
     const backfile = {}
     console.log("file :" , file['mp3tag'])

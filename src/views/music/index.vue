@@ -32,7 +32,6 @@
 		<ul>
       <li class="topBnt">
         <vxBnt bg="#00d1b2" id="add_music" text="添加音乐"></vxBnt>
-        <vxBnt bg="#00d1b2" id="del_music" text="删除"></vxBnt>
       </li>
 
       <li class="vx_table" v-bind:style="{height:h + 'px'}">
@@ -62,6 +61,7 @@ export default{
     clickBnt (e, id) {
       if (id === 'add_music') {
         console.log('kk')
+        this.$store.dispatch('clearUploadBack')
         this.$store.dispatch('changeAddMusicState', true)
       } else if (id === 'del_music') {
         console.log('dfffe')

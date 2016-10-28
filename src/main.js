@@ -8,6 +8,11 @@ import routerConfig from './routers'
 import store from './vuex/store'
 import FastClick from 'fastclick'
 import localforage from 'localforage'
+
+import Element from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+
+Vue.use(Element)
 console.log('Strings must use singlequote:', localforage)
 window.addEventListener('load', () => {
   FastClick.attach(document.body)

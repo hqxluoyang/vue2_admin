@@ -1,5 +1,6 @@
 import vue from 'vue'
 import tools from '../../../service/tools'
+import toolsMusic from './method/changeMusicEl'
 
 /**
  * get请求
@@ -7,21 +8,15 @@ import tools from '../../../service/tools'
  * @param  {String} options.query query参数
  * @return {Promise}               Promise
  */
-const _get = ({ url, query }, commit) => {
-  if (commit) commit('START_LOADING')
+const _get = ({ url, query }, commit , flag) => {
+  if (commit && flag) commit('START_LOADING')
   let _url
-  /*
-  if (query) {
-    _url = `http://54.223.119.207:8082/${url}?${query}`
-  } else {
-    _url = `http://54.223.119.207:8082/${url}`
-  }
-  */
   if (query) {
     _url = url + '?' + query
   } else {
+    _url = url
   }
-
+  console.log('_url:', _url)
   return vue.http.get(_url)
     .then((res) => {
       if (commit) commit('FINISH_LOADING')
@@ -33,7 +28,7 @@ const _get = ({ url, query }, commit) => {
 }
 
 /**
- * 获取即将开始电影列表
+ * 获取即将开始音乐列表
  * @param  {Function} options.commit store对象解构出来的函数，无需手动提供
  * @param  {Number} page             页数
  * @param  {Number} count             每页数量
@@ -47,6 +42,24 @@ export const getMusicList = ({ commit }, page, count) => {
   return _get({url, query}, commit)
     .then((json) => {
       return commit('FETCH_MUSIC_LIST_SUCCESS', json.result.list)
+    })
+    .catch((error) => {
+      return Promise.reject(error)
+    })
+}
+
+/**
+ * 获取music table 总页数
+ * @param  {Function} options.commit store
+ * @return {Promise}                  Promise
+ */
+export const getMusicTotal = ({ commit }) => {
+  const url = tools.getUrl('admin/countmusics')
+
+  return _get({url}, commit)
+    .then((json) => {
+      console.log('yyyyyyyyyyyyyyyy:', json)
+      return commit('FETCH_MUSIC_TOTAL', json.result.count)
     })
     .catch((error) => {
       return Promise.reject(error)
@@ -67,6 +80,7 @@ export const publishMusic = ({ commit }, item) => {
   const query = `id=${item.id}&_t=` + new Date().getTime()
   return _get({url, query}, commit)
     .then((json) => {
+      console.log('list :', json.result.list)
       return commit('FETCH_MUSIC_LIST_SUCCESS', json.result.list)
     })
     .catch((error) => {
@@ -107,13 +121,22 @@ export const pushMusicList= ({commit}, musicList) => {
 }
 
 /**
- * 添加单首歌曲
+ * 添加上传状态上传状态
  * @param  musicList // 要保存的music list  : Array
  */
 
-export const uploadSuccessBack= ({commit}, musicList) => {
-  console.log('UPLOAD_BACK_ITEM:', musicList)
-  commit('UPLOAD_BACK_ITEM' , musicList)
+export const uploadSuccessBack= ({commit}, item) => {
+  commit('UPLOAD_BACK_ITEM', item)
+}
+
+/**
+ * 
+   清除上传状态
+ * @param  musicList // 要保存的music list  : Array
+ */
+
+export const clearUploadBack= ({commit}) => {
+  commit('UPLOAD_BACK_CLEAR')
 }
 
 /**
@@ -130,12 +153,75 @@ export const uploadMusicForm = ({ commit }, item) => {
   console.log('file name:' , item , query , url)
   return _get({url, query}, commit)
     .then((json) => {
-      console.log("jjjjjjjjson:" , json)
-      return commit('PUSH_MUSIC_LIST', [json.result])
+      commit('ADD_MUSIC_PANEL', false)
+      return commit('PUSH_MUSIC_LIST', [json.result.music])
     })
     .catch((error) => {
       return Promise.reject(error)
     })
 }
+
+
+/**
+ * 音乐上架操作
+ * @param  {id} id 提供唯一的接口
+ * @return {Promise}                  Promise
+ */
+export const putAwayMusic = ({ commit }, item) => {
+  //const url = '/admin/activatemusic'
+  const url = tools.getUrl('admin/activatemusic')
+  const query = tools.jsonToStr(item);
+  return _get({url, query}, commit , false)
+    .then((json) => {
+      return commit('CHANGE_MUSIC_ELEMENT', {id:item.id, status:1})
+    })
+    .catch((error) => {
+      return Promise.reject(error)
+    })
+}
+
+/**
+ * 音乐同步到七牛操作
+ * @param  {id} id 提供唯一的接口
+ * @return {Promise}                  Promise
+ */
+export const putAwayQiniu = ({ commit }, item) => {
+  //const url = '/admin/activatemusic'
+  const url = tools.getUrl('admin/sync2qiniu')
+  const query = tools.jsonToStr(item);
+  console.log('file name:' , item , query , url)
+  return _get({url, query}, commit)
+    .then((json) => {
+      if(json.status.code === 0){
+        return commit('CHANGE_MUSIC_ELEMENT', {id:item.id, status:2})
+      }
+    })
+    .catch((error) => {
+      return Promise.reject(error)
+    })
+}
+
+/**
+ * 音乐下架架操作
+ * @param  {id} id 提供唯一的接口
+ * @return {Promise}                  Promise
+ */
+export const slodMusic = ({ commit }, item) => {
+  //const url = '/admin/activatemusic'
+  const url = tools.getUrl('admin/deletemusic')
+  const query = tools.jsonToStr(item);
+  return _get({url, query}, commit)
+    .then((json) => {
+      if(json.status.code === 0){
+        return commit('CHANGE_MUSIC_ELEMENT', {id:item.id, status:0}) 
+      }
+      
+    })
+    .catch((error) => {
+      return Promise.reject(error)
+    })
+}
+
+
 
 

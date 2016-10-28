@@ -14,7 +14,7 @@ fun:
   }
 
   .selectColor{
-    background:#00d1b2;
+    background:#b9bbbb;
     color:#fff;
   }
   .hoverStyle{
@@ -30,14 +30,30 @@ fun:
     color:#000;
   }
 
-  .downU{
+  .basicStatus{
     color: #fff;
-    background:#009966;
-    width:50px;
+    width:70px;
     display:inline-block;
     height:35px;
+    box-shadow: 2px 3px 9px #b9b9b9;
     line-height:35px;
     color:#000;
+  }
+
+  .basicStatus.downU_up{
+    background:#e69393;
+  }
+
+  .basicStatus.downU_sh{
+    background:#d9edf7;
+  }
+
+  .basicStatus.downU_down{
+    background:#dff0d8;
+  }
+
+  .basicStatus.downU_qiniu{
+    background:#f2dede;
   }
 
   .downM:hover{
@@ -53,7 +69,7 @@ fun:
         opacity:0.8;
       };
   	  .headerCss{
-  	    background:#9a9a9a;
+  	    background:#20a0ff;
   	    color:#fff;
   	  }
   	  tr{
@@ -77,10 +93,11 @@ fun:
 	    <th v-for="(item, index) in header">{{item.name}}</th>
 	  </tr>
       <tbody>
-      	 <tr class="trStyle" @click="clickTr(index)" v-for="(item, index) in tableList" v-bind:class="{selectColor: index === select, hoverStyle:index === hoverIndex}">
+      	 <tr @dblclick="showAllEl(item)" class="trStyle" @click="clickTr(index)" v-for="(item, index) in tableList" v-bind:class="{selectColor: index === select, hoverStyle:index === hoverIndex}">
 	      <th>{{index + 1}}</th>
 	     
 	      <th>{{item.song}}</th>
+        <th>{{item.fileext}}</th>
 	      <th>{{item.favoritecnt_fake}}</th>
 	      <th>{{item.downloadcnt}}</th>
 	      <th>{{item.favoritecnt}}</th>
@@ -88,14 +105,21 @@ fun:
 	      <th>{{item.createtime}}</th>
 	   
 	      <th>
-	      	<span v-bind:class='{downU:item.status == 0, downM:item.status == 1}'>{{item.status == 0 ? '上架' : '下架'}}</span>
+          <span @click="putAwayMusic(item)" v-show="item.status==0" class='basicStatus downU_up'>上架</span>
+          <span @click="soldMusic(item)" v-show="item.status==1" class='basicStatus downU_down'>下架</span>
+	      	<span @click="putAwayMusic(item)" v-show="item.status==2" class='basicStatus downU_sh'>待审核/上架</span>
+          <span @click="putAwayQiniu(item)" v-show="item.status==3" class='basicStatus downU_qiniu'>待同步</span>
 	      </th>
+
+        <th>
+          <span @click="soldMusic(item)" class='basicStatus downU_down'>修改</span>
+        </th>
 	      
 	  	</tr>
       </tbody>
 	  
 	</table>
-	<tablePage></tablePage>
+	<tablePage :pageMessage='musicTablePage'></tablePage>
   </div>
 </template>
 
@@ -120,6 +144,8 @@ export default{
       }, {
         name: '歌曲名'
       }, {
+        name: '扩展名'
+      }, {
         name: '展示收藏'
       }, {
         name: '下载次数'
@@ -131,6 +157,8 @@ export default{
         name: '修改时间'
       }, {
         name: '状态'
+      }, {
+        name: '修改'
       }]
     }
   },
@@ -153,17 +181,31 @@ export default{
     },
     hoverSelect (index) {
       this.hoverIndex = index
+    },
+    putAwayMusic (item) {
+      this.$store.dispatch('putAwayMusic', {id: item.id})
+    },
+    soldMusic (item) {
+      this.$store.dispatch('slodMusic', {id: item.id})
+    },
+    putAwayQiniu (item) {
+      this.$store.dispatch('putAwayQiniu', {id: item.id})
+    },
+    showAllEl (item) {},
+    handleSizeChange (val) {
+      console.log('change page:', val)
     }
   },
   mounted () {
     let height = tools.getContainerH()
     this.h = height
-    this.$store.dispatch('getMusicList', 1, 10)
-    console.log('height :', height)
+    this.$store.dispatch('getMusicList', 1, this.musicTablePage.pageCount)
+    this.$store.dispatch('getMusicTotal')
   },
   computed: {
     ...mapGetters({
-      tableList: 'getMusicList'
+      tableList: 'getMusicList',
+      musicTablePage: 'getMusicPageMessage'
     })
   },
   created () {

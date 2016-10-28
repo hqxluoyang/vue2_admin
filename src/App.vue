@@ -50,9 +50,7 @@ export default {
   *{
     box-sizing: border-box;
   }
-  img{
-    width: 100%; transition: all 1.2s ease; opacity: 1;
-  }
+  
   @-webkit-keyframes nprogress-spinner {
     0%   { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }

@@ -6,7 +6,7 @@
           <i class="iconfont icon-list"></i>
         </div>
         <div class="toolbar-title">
-          闪传音乐管理
+          X Player后台
         </div>
       </a>
     </h1>

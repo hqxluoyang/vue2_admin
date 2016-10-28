@@ -33,10 +33,6 @@
     cursor: pointer;
   }
 
-  .movie-item img {
-    width: 100%;
-  }
-
   .desc {
     overflow: hidden;
     /*height: 50px;*/

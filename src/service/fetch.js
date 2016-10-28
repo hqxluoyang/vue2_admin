@@ -32,3 +32,5 @@ const _get = ({ url, query }, commit) => {
       return Promise.reject(new Error(res.status))
     })
 }
+
+

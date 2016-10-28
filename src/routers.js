@@ -1,11 +1,12 @@
 export default [{
   path: '/',
   name: 'index',
+  activeClass: 'custom-active-class',
   component: require('./views/home/index')
 }, {
   path: '/login',
   name: 'login',
-  component: require('./views/member/login')
+  component: require('./views/login/index')
 }, {
   path: '/music',
   name: 'music',

@@ -1,66 +1,47 @@
 /**
-	author : sailing
-	date : 2016-10-24
-	fun: table 分页
-***/
+  author: sailing
+  date: 2016-10-28
+  fun:
+**/
 
-<style lang="less">
-	.vx-tabelPage{
-      height:35px;
-      position:relative;
-      text-align:center;
-      padding-left:10px;
-      padding-right:10px;
-      color:#fff;
-      width:100%;
-     
-      line-height:30px;
-      margin-top:10px;
-      display:inline-block;
-      .ulPage{
-        text-align:left;
-        .itemPage{
-          width:30px;
-          margin-left:5px;
-          background:#00d1b2;
-          text-align:center;
-          display:inline-block
-        }
-      }
-      
-	}
+<style>
+.block{
+  margin-top:10px;
+  height:41px;
+  background:#fff;
+}
 </style>
 
 <template>
-	<div class="vx-tabelPage">
-	  <ul class="ulPage">
-      <li class="itemPage" style="width:100px" @click="prePage()">上一页</li>
-      <li class="itemPage" style="border:0">...</li>
-      <li class="itemPage" @click="currentPage($index)" v-for="(item , index) in pageLen">
-        {{item}}
-      </li>
-      <li class="itemPage" style="border:0">...</li>
-      <li class="itemPage" style="width:100px" @click="nextPage()">下一页</li>
-    </ul>
-	</div>
+  <div class="block">
+    <elpagination
+      @sizechange="handleSizeChange"
+      @currentchange="handleCurrentChange"
+      :current-page="5"
+      :page-sizes="[pageMessage.pageCount]"
+      :page-size="100"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="pageMessage.total">
+    </elpagination>
+  </div>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      pageLen: 10,
-      pageStart: 5,
-      pageEnd: this.pageStart + 10
-    }
-  },
-  methods: {
-    clickBnt (e) {
-      this.$parent.clickBnt(e, this.id)
-    }
-  },
-  props: {
-    bg: String
+  import elpagination from 'element-ui/lib/pagination/index'
+  export default{
+    computed: {},
+    data () {},
+    props: {
+      pageMessage: Object
+    },
+    methods: {
+      handleCurrentChange (val) {
+        this.$parent.handleCurrentChange(val)
+      },
+      handleSizeChange (val) {
+        this.$parent.handleSizeChange(val)
+      }
+    },
+    components: {elpagination}
   }
-}
 </script>

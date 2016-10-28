@@ -18,10 +18,6 @@
     text-align: center;
     overflow: hidden;
   }
-  .silde img {
-    width: 100%;
-  }
-
   .movie ul {
     padding-top: 18px;
   }

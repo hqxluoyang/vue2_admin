@@ -6,6 +6,7 @@ import tools from './tools'
 import getBackData from './getBackData'
 function upload (config) {
   this.files = config.files
+  this.type = config.type
   this.vm = config.vm
 }
 
@@ -36,7 +37,7 @@ upload.prototype.onChange = function(e){
     if (xhr.status == 200) {
       var response = xhr.responseText;
       var json = JSON.parse(response)
-      const music = getBackData.getMusicData(json.result)
+      const music = getBackData.getMusicPicData(json.result , xhr.upload.scope.type)
       vueSelf.vm.$store.dispatch('uploadSuccessBack', music) 
     } else {
           console.log("response 1:" , response)
@@ -59,6 +60,7 @@ upload.prototype.send = function(file){
   xhr.addEventListener("error", this.uploadFailed, false);
   xhr.addEventListener("abort", this.uploadCanceled, false);
   */
+  //xhr.upload.addEventListener("progress", this.uploadProgress, false);
   xhr.open("POST", url)
   xhr.withCredentials = "true";
   xhr.onreadystatechange = this.onChange;

@@ -13,6 +13,11 @@ const state = {
     song: '',
     singer:'',
     album: ''
+  },
+  tipMessage: true,
+  musicPage: {
+    total: 100,
+    pageCount: 30
   }
 }
 

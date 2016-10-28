@@ -11,3 +11,7 @@ export const PUSH_MUSIC_LIST = 'PUSH_MUSIC_LIST'    // 添加音乐数组到列�
 
 export const UPLOAD_BACK_ITEM = 'UPLOAD_BACK_ITEM' // 添加音乐的时候展示当前元素
 export const UPLOAD_MUSIC_FROM = 'UPLOAD_MUSIC_FROM' // 提交上传的音乐的表单
+
+export const CHANGE_MUSIC_ELEMENT = 'CHANGE_MUSIC_ELEMENT' // 修改音乐的元素
+export const FETCH_MUSIC_TOTAL = 'FETCH_MUSIC_TOTAL' // 设置音乐的总数
+export const UPLOAD_BACK_CLEAR = 'UPLOAD_BACK_CLEAR' // 清空上传的音乐
