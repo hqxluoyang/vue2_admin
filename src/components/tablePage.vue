@@ -29,8 +29,6 @@
 <script>
   import elpagination from 'element-ui/lib/pagination/index'
   export default{
-    computed: {},
-    data () {},
     props: {
       pageMessage: Object
     },

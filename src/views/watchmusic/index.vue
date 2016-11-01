@@ -30,7 +30,7 @@
 	<div class="music_container">
 		<ul>
       <li class="topBnt">
-        <vxBnt bg="#00d1b2" id="add_music" text="添加音乐"></vxBnt>
+        <vxBnt bg="#00d1b2" id="add_music" text="操作"></vxBnt>
       </li>
 
       <li class="vx_table" v-bind:style="{height:h + 'px'}">

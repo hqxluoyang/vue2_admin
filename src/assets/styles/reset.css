@@ -108,3 +108,8 @@ input {
   left:0;
   top:0;
 }
+
+.router-link-active {
+  background:#333;
+}
+

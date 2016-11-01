@@ -4,6 +4,7 @@ export const FETCH_DETAIL_SUCCESS = 'FETCH_DETAIL_SUCCESS'
 export const FETCH_BANNER_SUCCESS = 'FETCH_BANNER_SUCCESS'
 
 export const ADD_MUSIC_PANEL = 'ADD_MUSIC_PANEL'
+export const CHANGE_MUSIC_PANEL = 'CHANGE_MUSIC_PANEL' // 修改音乐的panel的显示状态
 export const GET_MUSIC_LIST = 'GET_MUSIC_LIST'
 
 export const FETCH_MUSIC_LIST_SUCCESS = 'FETCH_MUSIC_LIST_SUCCESS'
@@ -15,3 +16,4 @@ export const UPLOAD_MUSIC_FROM = 'UPLOAD_MUSIC_FROM' // 提交上传的音乐的
 export const CHANGE_MUSIC_ELEMENT = 'CHANGE_MUSIC_ELEMENT' // 修改音乐的元素
 export const FETCH_MUSIC_TOTAL = 'FETCH_MUSIC_TOTAL' // 设置音乐的总数
 export const UPLOAD_BACK_CLEAR = 'UPLOAD_BACK_CLEAR' // 清空上传的音乐
+export const UPDATE_ONE_MUSIC = 'UPDATE_ONE_MUSIC' // 修改一首音乐

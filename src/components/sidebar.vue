@@ -7,7 +7,7 @@
         <nav v-show="show">
           <ul style="text-align:center">
             <li v-for="menu in menuList">
-              <router-link :to='menu.path'><span>{{menu.name}}</span></router-link>
+              <router-link :to='menu.path' exact><span>{{menu.name}}</span></router-link>
             </li>
           </ul>
         </nav>
@@ -83,6 +83,7 @@
             display: block;
             /*width: 100%;*/
             padding: 0 16px;
+            text-decoration:none;
             border-bottom: 1px dotted #333;
             .right {
               float: right;
@@ -107,7 +108,12 @@
       })
     },
     data () {
-      let menuList = [{name: '首页', path: '/'}, {name: '音乐管理', path: '/music'}, {name: '音乐上架', path: '/cinema'}, {name: '用户管理', path: '/login'}, {name: '设置', path: '/card'}]
+      let menuList = [{name: '首页', path: '/'},
+        {name: '音乐管理', path: '/music'},
+        {name: '音乐补充', path: '/songadd'},
+        {name: '数据监测', path: '/watchmusic'},
+        {name: '用户管理', path: '/login'},
+        {name: '设置', path: '/card'}]
       return { menuList: menuList }
     },
     methods: {

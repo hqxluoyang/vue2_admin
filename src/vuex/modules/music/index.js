@@ -7,6 +7,7 @@ import mutations from './mutations'
 
 const state = {
   addMusic: false,
+  changeMusic: false,
   musicTable: [],
   uploadBackItem: {
     filename:'',

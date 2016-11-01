@@ -99,6 +99,16 @@ export const changeAddMusicState = ({commit}, isShow) => {
 }
 
 /**
+ * 修改添加音乐的状态
+ * @param  显示或者关闭音乐弹出框
+ * @return {Promise}                  Promise
+ */
+export const changeMusicState = ({commit}, isShow) => {
+  commit('CHANGE_MUSIC_PANEL', isShow)
+}
+
+
+/**
  * 获取后台音乐
  * @param  {Function} options.commit store对象解构出来的函数，无需手动提供
  * @param  {Number} id             电影id
@@ -126,6 +136,7 @@ export const pushMusicList= ({commit}, musicList) => {
  */
 
 export const uploadSuccessBack= ({commit}, item) => {
+  console.log('item :,', item)
   commit('UPLOAD_BACK_ITEM', item)
 }
 
@@ -155,6 +166,29 @@ export const uploadMusicForm = ({ commit }, item) => {
     .then((json) => {
       commit('ADD_MUSIC_PANEL', false)
       return commit('PUSH_MUSIC_LIST', [json.result.music])
+    })
+    .catch((error) => {
+      return Promise.reject(error)
+    })
+}
+
+/**
+ * 跟新音乐的接口
+ * @param  {Function} options.commit store对象解构出来的函数，无需手动提供
+ * @return {Promise}                  Promise
+ */
+export const changeMusicForm = ({ commit }, item) => {
+  //const url = '/admin/activatemusic'
+  const url = tools.getUrl('admin/updatemusic')
+  const query = tools.jsonToStr(item);
+
+  return _get({url, query}, commit)
+    .then((json) => {
+      if(json.status.code == 0) {
+        commit('CHANGE_MUSIC_PANEL', false)
+        console.log('upload item:', item)
+        return commit('UPDATE_ONE_MUSIC', item)
+      }
     })
     .catch((error) => {
       return Promise.reject(error)

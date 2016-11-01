@@ -3,6 +3,7 @@ var express = require('express')
 var webpack = require('webpack')
 var config = require('../config')
 var opn = require('opn')
+var routes = require('./routes/index');
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
@@ -33,6 +34,8 @@ compiler.plugin('compilation', function (compilation) {
     cb()
   })
 })
+
+app.use('/', routes);
 
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {

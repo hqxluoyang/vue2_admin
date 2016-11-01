@@ -1,5 +1,6 @@
 import {
   ADD_MUSIC_PANEL,
+  CHANGE_MUSIC_PANEL,
   FETCH_MUSIC_LIST_SUCCESS,
   PUSH_MUSIC_LIST,
   UPLOAD_BACK_ITEM,
@@ -7,7 +8,8 @@ import {
   CHANGE_MUSIC_ELEMENT,
   TIP_MESSAGE,
   FETCH_MUSIC_TOTAL,
-  UPLOAD_BACK_CLEAR
+  UPLOAD_BACK_CLEAR,
+  UPDATE_ONE_MUSIC
   }
   from './mutation-type'
 import toolsMusic from './method/changeMusicEl'
@@ -15,6 +17,10 @@ const mutations = {
   // 添加音乐pannel的状态
   [ADD_MUSIC_PANEL] (state, isShow) {
     state.addMusic = isShow
+  },
+  // 修改音乐pannel的状态
+  [CHANGE_MUSIC_PANEL] (state, isShow) {
+    state.changeMusic = isShow
   },
   // tip_message的状态
   [TIP_MESSAGE] (state, isShow) {
@@ -30,6 +36,17 @@ const mutations = {
     toolsMusic.changeMethod(musicList)
     for(var i=0; i<musicList.length ; i++){
       state.musicTable.push(musicList[i])
+    }
+  },
+  // 修改一条音乐记录
+  [UPDATE_ONE_MUSIC] (state, music) {
+    var copy = Object.assign({}, music);
+    toolsMusic.handlerDate(copy)
+    for(var i=0; i<state.musicTable.length ; i++){
+      if(state.musicTable[i]['id'] == copy['id']){
+        state.musicTable.splice(i,1,copy)
+        break
+      }
     }
   },
   // 上传音乐成功之后要显示的东西元素

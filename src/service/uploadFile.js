@@ -7,6 +7,7 @@ import getBackData from './getBackData'
 function upload (config) {
   this.files = config.files
   this.type = config.type
+  this.progress = config.progress
   this.vm = config.vm
 }
 
@@ -18,7 +19,11 @@ upload.prototype.uploadFailed= function(){
 }   
    
 upload.prototype.uploadProgress= function(evt,pro){
-  console.log('progress :')
+  if (evt.lengthComputable) {
+    var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+    console.log('this.scope.progress:', this.scope.progress , this.scope)
+    this.scope.progress.len = percentComplete;
+  }
 };
    
 upload.prototype.uploadCanceled= function(){
@@ -52,7 +57,7 @@ upload.prototype.send = function(file){
   var that = this
   var url = tools.getUrl('admincomm/upload');
   fd.append("file",file)
-
+ // var url = "uploadImage"
   var xhr = new XMLHttpRequest()
   /*
   xhr.upload.addEventListener("progress", this.uploadProgress, false);

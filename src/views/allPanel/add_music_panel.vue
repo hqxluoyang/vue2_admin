@@ -10,7 +10,7 @@
       background:#f3f3f3;
       left:50%;
       z-index:2500;
-      top:50px;
+      top:80px;
       min-height:100px;
       margin-left:-200px;
       border-radius:10px;
@@ -72,12 +72,12 @@
           <li class="line">
             <vxBnt bg="#00d1b2" id='upload_music' text="上传音乐"></vxBnt>
             <input id="uploadMusicId" @change="musicChange($event)" type="file" style="display:none"/>
-            <vxProgress :width="progressMusic"></vxProgress>
+            <vxProgress :pgObj="pgMusic"></vxProgress>
           </li>
           <li class="line">
             <vxBnt bg="#00d1b2" id='upload_pic' text="上传图片"></vxBnt>
             <input id="uploadPicId" @change="picChange($event)" type="file" style="display:none"/>
-            <vxProgress :width="progressPic"></vxProgress>
+            <vxProgress :pgObj="pgPic"></vxProgress>
             <img class="showImg" v-bind:src="imgSrc"/>
           </li>
          
@@ -115,8 +115,12 @@ export default {
     return {
       flag: true,
       imgSrc: '',
-      progressMusic: 0,
-      progressPic: 0
+      pgMusic: {
+        len: 0
+      },
+      pgPic: {
+        len: 0
+      }
     }
   },
   methods: {
@@ -151,6 +155,7 @@ export default {
       console.log(e.target.files)
       upModule.uploadObj({
         files: e.target.files,
+        progress: this.pgMusic,
         type: 'music',
         vm: this
       })
@@ -160,6 +165,7 @@ export default {
       canvasImg.getBase64Img(files, this)
       upModule.uploadObj({
         files: files,
+        progress: this.pgPic,
         type: 'img',
         vm: this
       })

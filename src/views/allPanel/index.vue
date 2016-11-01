@@ -2,7 +2,7 @@
 </style>
 
 <template>
-	<div>
+  <div>
     <addMusicPanel></addMusicPanel>
     <addLoadingPanel></addLoadingPanel>
     <changeMusicPanel></changeMusicPanel>

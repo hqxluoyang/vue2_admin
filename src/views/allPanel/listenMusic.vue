@@ -1,16 +1,16 @@
 /**
 	author : sailing
 	date : 2016-10-21
-	fun: button
+	fun: 听音乐
 ***/
 
 <style lang="less">
-	.vx-panel-width{
+	.vx-panel{
       width:400px;
       background:#f3f3f3;
       left:50%;
       z-index:2500;
-      top:80px;
+      top:50px;
       min-height:100px;
       margin-left:-200px;
       border-radius:10px;
@@ -65,37 +65,13 @@
   <div v-show="isShow">
     <div class="shadowDiv_all">
     </div>
-  	<div class="vx-panel-width" v-show="isShow">
-  	  <musicPanelHeader text="修改音乐"></musicPanelHeader>
+  	<div class="vx-panel" v-show="isShow">
+  	  <musicPanelHeader text="添加音乐"></musicPanelHeader>
       <div class="musicPanel">
         <ul class="uploadPanel">
           <li class="line">
-            <vxBnt bg="#00d1b2" id='upload_music' text="修改音乐"></vxBnt>
-            <input id="uploadMusicId" @change="musicChange($event)" type="file" style="display:none"/>
-            <vxProgress :pgObj="pgMusic"></vxProgress>
-            <audio style="margin-left:20px;margin-top:10px" src="" controls="controls" loop="loop" autoplay="autoplay">亲 您的浏览器不支持html5的audio标签</audio>
           </li>
           <li class="line">
-            <vxBnt bg="#00d1b2" id='upload_pic' text="修改图片"></vxBnt>
-            <input id="uploadPicId" @change="picChange($event)" type="file" style="display:none"/>
-            <vxProgress :pgObj="pgPic"></vxProgress>
-          </li>
-         
-          <li class="line">
-            <label>作者</label>
-            <input v-model='showItem.singer' class="inputStyle"/>
-          </li>
-          <li class="line">
-            <label>歌曲名称</label>
-            <input v-model='showItem.song' class="inputStyle"/>
-          </li>
-          <li class="line">
-            <label>文件名称</label>
-            <input v-model='showItem.filename' class="inputStyle"/>
-          </li>
-           <li class="line">
-            <label>模拟收藏</label>
-            <input v-model='showItem.favoritecnt_fake' class="inputStyle"/>
           </li>
         </ul>
       </div>
@@ -145,10 +121,9 @@ export default {
       this.$store.dispatch('changeAddMusicState', false)
     },
     submit (e) {
-      console.log('this.showItem :', this.showItem)
       const text = addMusicJudge.jugeFlag(this.showItem)
       if (!text) {
-        this.$store.dispatch('changeMusicForm', this.showItem)
+        this.$store.dispatch('uploadMusicForm', this.showItem)
       } else {
         this.$message({
           message: text,
@@ -177,14 +152,8 @@ export default {
     },
     cancel (e) {
       console.log('cancel')
-      this.$store.dispatch('changeMusicState', false)
+      this.$store.dispatch('changeAddMusicState', false)
     }
-  },
-  computed: {
-    ...mapGetters({
-      isShow: 'getChangeMusic',
-      showItem: 'getUploadBackItem'
-    })
   },
   props: {
     bg: String,

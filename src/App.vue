@@ -17,14 +17,10 @@
 import Sidebar from './components/sidebar'
 import Navbar from './components/navbar'
 import allPanel from './views/allPanel/index'
-import { mapGetters } from 'vuex'
 export default {
   components: {
     Sidebar, Navbar, allPanel
-  },
-  computed: mapGetters({
-    loading: 'getLoading'
-  })
+  }
 }
 </script>
 

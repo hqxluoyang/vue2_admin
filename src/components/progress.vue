@@ -19,24 +19,33 @@
       	height:5px;
       	background:red;
       }
+      .imgBg{
+          float:right;
+          color:#000;
+          margin-right:-35px;
+          margin-top:-5px;
+      }
 	}
 </style>
 
 <template>
 	<div class="vx-progress">
-	  <p class="classWidth" v-bind:style="{width:width + 'px'}"></p>
+	  <p class="classWidth" v-bind:style="{width:pgObj.len + '%'}"></p>
+    <span class='imgBg'>{{pgObj.len + '%'}}<span>
 	</div>
 </template>
 
 <script>
 export default {
-  methods: {
-    clickBnt (e) {
-      this.$parent.clickBnt(e, this.id)
+  data () {
+    return {
+      width: 20
     }
   },
+  mounted: {
+  },
   props: {
-    width: Number
+    pgObj: Object
   }
 }
 </script>

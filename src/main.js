@@ -21,6 +21,23 @@ window.addEventListener('load', () => {
 Vue.use(VueRouter)
 Vue.use(VueResource)
 const router = new VueRouter({routes: routerConfig})
+router.beforeEach((to, from, next) => {
+  console.log('router:', router)
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+
+    if (!auth.loggedIn()) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // 确保一定要调用 next()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   router,
@@ -28,3 +45,4 @@ new Vue({
   store,
   render: h => h(App)
 })
+

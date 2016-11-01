@@ -12,10 +12,14 @@ export default [{
   name: 'music',
   component: require('./views/music/index')
 }, {
-  path: '/cinema',
-  name: 'cinema',
-  component: require('./views/cinema/index')
+  path: '/songadd',
+  name: 'songadd',
+  component: require('./views/songadd/index')
 }, {
+  path: '/watchmusic',
+  name: 'watchmusic',
+  component: require('./views/watchmusic/index')
+},{
   path: '/detail/:id',
   name: 'detail',
   component: require('./views/film/detail')

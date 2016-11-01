@@ -40,10 +40,6 @@ fun:
     color:#000;
   }
 
-   .basicStatus:hover{
-      cursor:pointer;
-    }
-
   .basicStatus.downU_up{
     background:#e69393;
   }
@@ -97,26 +93,18 @@ fun:
 	    <th v-for="(item, index) in header">{{item.name}}</th>
 	  </tr>
       <tbody>
-      	 <tr @dblclick="showAllEl(item)" class="trStyle" @click="clickTr(index)" v-for="(item, index) in tableList">
+      	 <tr @dblclick="showAllEl(item)" class="trStyle" @click="clickTr(index)" v-for="(item, index) in tableList" v-bind:class="{selectColor: index === select, hoverStyle:index === hoverIndex}">
 	      <th>{{index + 1}}</th>
 	     
 	      <th>{{item.song}}</th>
-        <th>{{item.fileext}}</th>
 	      <th>{{item.favoritecnt_fake}}</th>
 	      <th>{{item.downloadcnt}}</th>
-	      <th>{{item.favoritecnt}}</th>
-	      <th>{{item.updatetime}}</th>
-	      <th>{{item.createtime}}</th>
-	   
 	      <th>
-          <span @click="putAwayMusic(item)" v-show="item.status==0" class='basicStatus downU_up'>上架</span>
-          <span @click="soldMusic(item)" v-show="item.status==1" class='basicStatus downU_down'>下架</span>
-	      	<span @click="putAwayMusic(item)" v-show="item.status==2" class='basicStatus downU_sh'>待审核/上架</span>
-          <span @click="putAwayQiniu(item)" v-show="item.status==3" class='basicStatus downU_qiniu'>待同步</span>
+          <span @click="soldMusic(item)" class='basicStatus downU_down'>上传</span>
 	      </th>
 
         <th>
-          <span @click="changeItemMusic(item)" class='basicStatus downU_down'>修改</span>
+          <span @click="changeItemMusic(item)" class='basicStatus downU_down'>关联歌曲</span>
         </th>
 	      
 	  	</tr>
@@ -148,21 +136,13 @@ export default{
       }, {
         name: '歌曲名'
       }, {
-        name: '扩展名'
+        name: '艺术家'
       }, {
-        name: '模拟收藏'
+        name: '收藏次数'
       }, {
-        name: '下载次数'
+        name: '操作'
       }, {
-        name: '实际收藏'
-      }, {
-        name: '上传时间'
-      }, {
-        name: '修改时间'
-      }, {
-        name: '状态'
-      }, {
-        name: '修改'
+        name: '关联'
       }]
     }
   },
@@ -184,6 +164,7 @@ export default{
       this.select = index
     },
     hoverSelect (index) {
+      this.hoverIndex = index
     },
     putAwayMusic (item) {
       this.$store.dispatch('putAwayMusic', {id: item.id})

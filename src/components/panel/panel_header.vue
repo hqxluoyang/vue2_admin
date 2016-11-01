@@ -22,6 +22,9 @@
         width:40px;
         height:40px;
       }
+      .close:hover{
+        cursor:pointer;
+      }
 	}
 </style>
 
