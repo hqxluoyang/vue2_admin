@@ -30,11 +30,21 @@
 	<div class="music_container">
 		<ul>
       <li class="topBnt">
-        <vxBnt bg="#00d1b2" id="add_music" text="操作"></vxBnt>
+        <el-select v-model="value">
+          <el-option
+          v-for="item in options"
+          :label="item.label"
+          :value="item.value">
+          </el-option>
+        </el-select>
       </li>
 
       <li class="vx_table" v-bind:style="{height:h + 'px'}">
-        <musicTable></musicTable>
+        <el-tabs style="width:100%">
+          <el-tab-pane label="搜索"><searchTable></searchTable></el-tab-pane>
+          <el-tab-pane label="收藏"><favoritTable></favoritTable></el-tab-pane>
+          <el-tab-pane label="缓存"><saveTable></saveTable></el-tab-pane>
+        </el-tabs>
       </li>
 
     </ul>
@@ -46,12 +56,25 @@
 import { mapGetters } from 'vuex'
 import vxBnt from '../../components/vx_bnt.vue'
 import tools from '../../service/tools.js'
-import musicTable from './musicTable.vue'
+import searchTable from './searchTable.vue'
+import favoritTable from './favoritesTable.vue'
+import saveTable from './saveTable.vue'
 
 export default{
   data () {
     return {
-      h: 200
+      h: 200,
+      options: [{
+        value: '1',
+        label: '昨日'
+      }, {
+        value: '2',
+        label: '前七天'
+      }, {
+        value: '3',
+        label: '前30天'
+      }],
+      value: ''
     }
   },
   methods: {
@@ -78,7 +101,7 @@ export default{
     ...mapGetters({
     })
   },
-  components: {vxBnt, musicTable}
+  components: {vxBnt, searchTable, favoritTable, saveTable}
 }
 
 </script>
