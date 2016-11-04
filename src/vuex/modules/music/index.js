@@ -18,8 +18,9 @@ const state = {
   tipMessage: true,
   musicPage: {
     total: 100,
-    pageCount: 30
-  }
+    pageCount: 50
+  },
+  mgrMusicStatus: 0
 }
 
 export default{

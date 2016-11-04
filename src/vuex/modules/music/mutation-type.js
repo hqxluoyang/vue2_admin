@@ -17,3 +17,7 @@ export const CHANGE_MUSIC_ELEMENT = 'CHANGE_MUSIC_ELEMENT' // 修改音乐的元
 export const FETCH_MUSIC_TOTAL = 'FETCH_MUSIC_TOTAL' // 设置音乐的总数
 export const UPLOAD_BACK_CLEAR = 'UPLOAD_BACK_CLEAR' // 清空上传的音乐
 export const UPDATE_ONE_MUSIC = 'UPDATE_ONE_MUSIC' // 修改一首音乐
+
+export const MRG_MUSIC_STATUS = 'MRG_MUSIC_STATUS' // 管理管理音乐界面上查询状态
+
+export const LOGIN_APP = 'LOGIN_APP' // 管理管理音乐界面上查询状态

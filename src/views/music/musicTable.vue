@@ -65,6 +65,7 @@ fun:
   }
   .tableCss{
   	position:relative;
+    min-height: 300px;
   	margin:0 auto;
   	table{
   	  width:100%;
@@ -92,10 +93,12 @@ fun:
 
 <template>
   <div class="tableCss">
+    <table>
+    </table>
     <table border="0">
       <tr class="headerCss">
-	    <th v-for="(item, index) in header">{{item.name}}</th>
-	  </tr>
+	      <th v-for="(item, index) in header">{{item.name}}</th>
+	    </tr> 
       <tbody>
       	 <tr @dblclick="showAllEl(item)" class="trStyle" @click="clickTr(index)" v-for="(item, index) in tableList">
 	      <th>{{index + 1}}</th>
@@ -120,8 +123,9 @@ fun:
         </th>
 	      
 	  	</tr>
+
       </tbody>
-	  
+	 
 	</table>
 	<tablePage :pageMessage='musicTablePage'></tablePage>
   </div>
@@ -177,6 +181,10 @@ export default{
         this.$store.dispatch('pushMusic', item)
       }
     },
+    handleCurrentChange (val) {
+      this.$store.dispatch('getMusicList', val, 10)
+      console.log('change page :', val)
+    },
     pushMusic (item) {
       this.$store.dispatch('pushMusicList', [item])
     },
@@ -206,13 +214,17 @@ export default{
   mounted () {
     let height = tools.getContainerH()
     this.h = height
-    this.$store.dispatch('getMusicList', 1, this.musicTablePage.pageCount)
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxx:', this.value)
+    this.$store.dispatch('getMusicList', {pn: 1,
+      status: this.value
+    })
     this.$store.dispatch('getMusicTotal')
   },
   computed: {
     ...mapGetters({
       tableList: 'getMusicList',
-      musicTablePage: 'getMusicPageMessage'
+      musicTablePage: 'getMusicPageMessage',
+      value: 'getMgrMusicStatus'
     })
   },
   components: {vxBnt, tablePage}

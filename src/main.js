@@ -21,10 +21,12 @@ window.addEventListener('load', () => {
 Vue.use(VueRouter)
 Vue.use(VueResource)
 const router = new VueRouter({routes: routerConfig})
-router.beforeEach((to, from, next) => {
-  console.log('router:', router)
-  if (to.matched.some(record => record.meta.requiresAuth)) {
 
+console.log('router bb:', router.go)
+//router.go(1)
+router.beforeEach((to, from, next) => {
+  
+  if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!auth.loggedIn()) {
       next({
         path: '/login',
@@ -38,6 +40,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+console.log(router)
+//router.go(1)
 /* eslint-disable no-new */
 new Vue({
   router,

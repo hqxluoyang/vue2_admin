@@ -12,7 +12,7 @@ const _get = ({ url, query }, commit , flag) => {
   if (commit && flag) commit('START_LOADING')
   let _url
   if (query) {
-    _url = url + '?' + query
+    _url = url + '?' + query + '&' + 'isdebug=andoumiao'
   } else {
     _url = url
   }
@@ -21,6 +21,7 @@ const _get = ({ url, query }, commit , flag) => {
     .then((res) => {
       if (commit) commit('FINISH_LOADING')
       if (res.status >= 200 && res.status < 300) {
+        console.log('res.data :', res.data)
         return res.data
       }
       return Promise.reject(new Error(res.status))
@@ -34,11 +35,44 @@ const _get = ({ url, query }, commit , flag) => {
  * @param  {Number} count             每页数量
  * @return {Promise}                  Promise
  */
-export const getMusicList = ({ commit }, page, count) => {
+export const getMusicList = ({ commit }, pageObj) => {
   const url = tools.getUrl('admin/findmusics')
+  const query = `status=${pageObj.status}&pn=${pageObj.pn}&_t=` + new Date().getTime()
+  return _get({url, query}, commit)
+    .then((json) => {
+      return commit('FETCH_MUSIC_LIST_SUCCESS', json.result.list)
+    })
+    .catch((error) => {
+      return Promise.reject(error)
+    })
+}
 
-  if(count == undefined) count=20
-  const query = `count=${count}&page=${page}&_t=` + new Date().getTime()
+
+/**
+ * app登陆
+ 
+ * @return {Promise}                  Promise
+ */
+export const appLogin = ({ commit }, obj) => {
+  const url = tools.getUrl('admin/adminlogin')
+
+  console.log('login :', obj)
+  
+  vue.http.post(url, obj, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }})
+   .then((json) => {
+      return commit('LOGIN_APP', json.result)
+    })
+    .catch((error) => {
+      return Promise.reject(error)
+    })
+
+  return
+  const query = `status=${status}&pn=${page}&_t=` + new Date().getTime()
   return _get({url, query}, commit)
     .then((json) => {
       return commit('FETCH_MUSIC_LIST_SUCCESS', json.result.list)

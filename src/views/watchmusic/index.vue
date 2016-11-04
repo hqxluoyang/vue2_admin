@@ -79,6 +79,7 @@ export default{
   },
   methods: {
     changeFile (e) {
+      console.log('change select: ')
     },
     clickBnt (e, id) {
       if (id === 'add_music') {

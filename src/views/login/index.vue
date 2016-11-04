@@ -11,7 +11,7 @@
     position:absolute;
     left:-100px;
     z-index:3200;
-    display:none;
+    display:block;
     top:0;
     background:#000;
 
@@ -25,7 +25,7 @@
         display:relative;
         .header{
           height: 150px;
-          background:#bdcade;
+          background:#dadada;
           text-align:center;
           line-height:150px;
           box-shadow:5px 5px 5px #ccc;
@@ -35,9 +35,10 @@
           .login-panel{
             width:400px;
             margin-top:30px;
-            padding-top:25px;
+            padding-top:65px;
+            border:1px solid #ccc;
             height:400px;
-            box-shadow:1px 2px 2px #ccc;
+            box-shadow:4px 6px 6px #ccc;
             margin-left:-200px;
             left:50%;
             position:absolute;
@@ -48,11 +49,13 @@
               text-align:center;
               font-size:18px;
             }
-
+            .line input:hover{
+              border-bottom:green 1px solid;
+            }
             .line.enter{
               margin-top:30px;
-              margin-right:60px;
-              text-align:right;
+              margin-left:60px;
+              text-align:left;
             }
           }
         }
@@ -72,14 +75,13 @@
                 <div class='login-panel'>
                   <ul>
                     <li class="line">
-                      <label>用户</label><input type='text' />
+                      <label>用户</label><input v-model='username' type='text' />
                     </li>
                     <li class="line">
-                      <label>密码</label><input type='password' />
+                      <label>密码</label><input v-model='password' type='password' />
                     </li>
                     <li class="line enter">
-                      <vxBnt bg="#000" id='upload_pic' text="取消"></vxBnt>
-                      <vxBnt bg="#00d1b2" id='upload_pic' text="登陆"></vxBnt>
+                      <vxBnt bg="#00d1b2" id='login_panel' text="登陆"></vxBnt>
                     </li>
                   </ul>
                 </div>
@@ -97,7 +99,19 @@ export default{
   data () {
     return {
       h: 1000,
-      w: 1000
+      w: 1000,
+      username: 'admin',
+      password: '123'
+    }
+  },
+  methods: {
+    clickBnt (e, id) {
+      if (id === 'login_panel') {
+        this.login()
+      }
+    },
+    login () {
+      this.$store.dispatch('appLogin', {username: this.user, password: this.password})
     }
   },
   mounted () {

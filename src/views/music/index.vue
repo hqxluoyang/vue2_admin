@@ -31,6 +31,13 @@
 		<ul>
       <li class="topBnt">
         <vxBnt bg="#00d1b2" id="add_music" text="添加音乐"></vxBnt>
+        <el-select v-on:change='change()' v-model="value" style="display:inline-block">
+          <el-option
+          v-for="item in options"
+          :label="item.label"
+          :value="item.value">
+          </el-option>
+        </el-select>
       </li>
 
       <li class="vx_table" v-bind:style="{height:h + 'px'}">
@@ -51,11 +58,28 @@ import musicTable from './musicTable.vue'
 export default{
   data () {
     return {
-      h: 200
+      h: 200,
+      options: [{
+        value: 0,
+        label: '下架'
+      }, {
+        value: 1,
+        label: '上架'
+      }, {
+        value: 2,
+        label: '审核'
+      }, {
+        value: 3,
+        label: '同步'
+      }]
     }
   },
   methods: {
     changeFile (e) {
+      console.log('change file: ')
+    },
+    change (val) {
+      console.log('change vualxxxxxxxxxxxxxxxx:', val)
     },
     clickBnt (e, id) {
       if (id === 'add_music') {
@@ -73,9 +97,11 @@ export default{
   mounted () {
     let height = tools.getContainerH()
     this.h = height
+    console.log('this.value xxxx:', this.valueSelect)
   },
   computed: {
     ...mapGetters({
+      value: 'getMgrMusicStatus'
     })
   },
   components: {vxBnt, musicTable}

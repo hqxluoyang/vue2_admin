@@ -9,7 +9,9 @@ import {
   TIP_MESSAGE,
   FETCH_MUSIC_TOTAL,
   UPLOAD_BACK_CLEAR,
-  UPDATE_ONE_MUSIC
+  UPDATE_ONE_MUSIC,
+  MRG_MUSIC_STATUS,
+  LOGIN_APP
   }
   from './mutation-type'
 import toolsMusic from './method/changeMusicEl'
@@ -69,6 +71,17 @@ const mutations = {
     console.log('count:', count)
     state.musicPage.total = count
   },
+  
+  // 音乐管理界面查询状态修改
+  [MRG_MUSIC_STATUS] (state, state_search) {
+    state.musicPage.mgrMusicStatus = state_search
+  },
+
+  // 音乐管理界面查询状态修改
+  [LOGIN_APP] (state, login) {
+    console.log('login search:', login)
+  },
+
   // 修改音乐的参数
   [CHANGE_MUSIC_ELEMENT] (state, item) {
     for(var j = 0 ; j < state.musicTable.length ; j++){

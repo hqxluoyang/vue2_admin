@@ -8,3 +8,5 @@ export const getMusicList = state => state.musicTable
 export const getUploadBackItem = state => state.uploadBackItem    //添加音乐的时候获得上传表单
 
 export const getMusicPageMessage = state => state.musicPage    //添加音乐的时候获得上传表单
+
+export const getMgrMusicStatus = state => state.mgrMusicStatus    //添加音乐的时候获得上传表单
